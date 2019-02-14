@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node ./server/core.js",
+    "start": "node ./server/core.js",
     "test": "nodemon ./server/core.js"
   },
   "author": "Bennett Schoonerman",
