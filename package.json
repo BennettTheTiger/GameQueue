@@ -1,0 +1,20 @@
+{
+  "name": "scoresite",
+  "version": "1.0.0",
+  "description": "A site to keep track of our team project scores.",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./server/core.js",
+    "test": "nodemon ./server/core.js"
+  },
+  "author": "Bennett Schoonerman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "ip": "^1.1.5",
+    "pg": "^7.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}

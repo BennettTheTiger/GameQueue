@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Name Maker</title>
+</head>
+
+<body>
+    <h1>Make a Team Name</h1>
+
+    <select id="adjectives"></select>
+    <select id="colors"></select>
+    <select id="species"></select>
+    <br/>
+    <button id="makeTeam">Create Team!</button>
+</body>
+
+<script>
+        "use strict"
+        //Word Arrays
+        let adjectives = ["Big","Mightly","Large","Small","Sneaky"];
+        let colors = ["Blue","White","Grey","Orange","Purple"];
+        let species = ["Orchas","Killer Whales","Humpback Whales"];
+
+        //get DOM refs
+        let adjectiveDom = document.querySelector('#adjectives');
+        let colorDom = document.querySelector('#colors');
+        let speciesDom = document.querySelector('#species');
+
+        //populate multi select
+        addOptions(adjectiveDom,adjectives);
+        addOptions(colorDom,colors);
+        addOptions(speciesDom,species);
+
+        //wire up add data button
+        document.querySelector('#makeTeam').addEventListener('click',addData);
+    
+        //populates the multiselect buttons from the string arrays
+        function addOptions(target,options){
+            options.forEach(itemText => {
+                var option = document.createElement("OPTION");
+                option.textContent = itemText;
+                target.appendChild(option);
+            });
+        }
+
+        //adds the new team name to the game que...
+        function addData(){
+            let val1 = document.querySelector('#adjectives').options[document.querySelector('#adjectives').selectedIndex].text;
+            let val2 = document.querySelector('#colors').options[document.querySelector('#colors').selectedIndex].text;
+            let val3 = document.querySelector('#species').options[document.querySelector('#species').selectedIndex].text;
+
+            let teamName = val1 + " " + val2 + " " + val3
+            console.log(teamName);
+            //Make Post Request
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/addTeam", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function(){
+                console.log(xhr.status);
+            };
+            xhr.send(JSON.stringify({teamName: teamName}));
+        }
+    </script>
+    <style type="text/css">
+        body{
+            text-align: center;
+        }  
+        
+        #makeTeam{
+            position: relative;
+            top: 20px;
+            width: 25%;
+            height: 30px;
+        }
+        
+    </style>
+</html>
